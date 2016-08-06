@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Td.Kylin.Cache.WebApi.Models
+﻿namespace Td.Kylin.Cache.WebApi.Models
 {
     /// <summary>
     /// 区域圈子
@@ -12,21 +6,25 @@ namespace Td.Kylin.Cache.WebApi.Models
     public class AreaForum
     {
         /// <summary>
-        /// 圈子ID
+        /// 区域ID
         /// </summary>
-        public long ForumID { get; set; }
+        public int AreaID { get; set; }
+        /// <summary>
+        /// 区域圈子ID
+        /// </summary>
+        public long AreaForumID { get; set; }
+        /// <summary>
+        /// 圈子名称
+        /// </summary>
+        public string ForumName { get; set; }
         /// <summary>
         /// 所属类目ID
         /// </summary>
         public long CategoryID { get; set; }
         /// <summary>
-        /// 类目名称
+        /// 系统圈子ID
         /// </summary>
-        public string CategoryName { get; set; }
-        /// <summary>
-        /// 圈子名称
-        /// </summary>
-        public string ForumName { get; set; }
+        public long ForumID { get; set; }
         /// <summary>
         /// 圈子Logo地址
         /// </summary>
