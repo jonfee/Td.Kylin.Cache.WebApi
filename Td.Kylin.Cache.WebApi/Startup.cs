@@ -27,9 +27,40 @@ namespace Td.Kylin.Cache.WebApi
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            _sqlType = new Func<SqlProviderType>(() =>
+            {
+                string sqltype = Configuration["Data:SqlType"] ?? string.Empty;
+                switch (sqltype.ToLower())
+                {
+                    case "npgsql":
+                        return SqlProviderType.NpgSQL;
+                    case "mssql":
+                    default:
+                        return SqlProviderType.SqlServer;
+                }
+            }).Invoke();
+
+            _sqlConn = Configuration["Data:DefaultConnection:ConnectionString"];
+            string redisConn = Configuration["Redis:ConnectString"];//Redis缓存服务器信息
+
+            //缓存
+            DataCacheExtensions.UseDataCache(new DataCacheServerOptions
+            {
+                CacheItems = null,
+                InitIfNull = true,
+                KeepAlive = true,
+                RedisConnectionString = redisConn,
+                SqlConnection = _sqlConn,
+                SqlType = _sqlType,
+                Level2CacheSeconds = int.Parse(Configuration["Redis:Level2CacheSeconds"])
+            });
         }
 
         public static IConfigurationRoot Configuration { get; private set; }
+
+        private static SqlProviderType _sqlType;
+        private static string _sqlConn;
 
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
@@ -49,39 +80,10 @@ namespace Td.Kylin.Cache.WebApi
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
-
-            SqlProviderType sqlType = new Func<SqlProviderType>(() =>
-            {
-                string sqltype = Configuration["Data:SqlType"] ?? string.Empty;
-
-                switch (sqltype.ToLower())
-                {
-                    case "npgsql":
-                        return SqlProviderType.NpgSQL;
-                    case "mssql":
-                    default:
-                        return SqlProviderType.SqlServer;
-                }
-            }).Invoke();
-
-            string redisConn = Configuration["Redis:ConnectString"]; //Redis缓存服务器信息
-            var sqlConn = Configuration["Data:DefaultConnection:ConnectionString"];
-
+            
             //BASE WEBAPI
-            app.UseKylinWebApi(Configuration["ServerId"], sqlConn, sqlType);
-
-            //缓存
-            app.UseDataCache(new CacheInjectionConfig
-            {
-                CacheItems = null,
-                InitIfNull = true,
-                KeepAlive = true,
-                Level2CacheSeconds = 600,
-                RedisConnectionString = redisConn,
-                SqlConnectionString = sqlConn,
-                SqlType = sqlType
-            });
-
+            app.UseKylinWebApi(Configuration["ServerId"], _sqlConn, _sqlType);
+            
             app.UseMvc();
         }
     }

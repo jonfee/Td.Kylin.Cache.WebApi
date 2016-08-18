@@ -15,8 +15,8 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Td.Kylin.WebApi": "1.1.10",
-    "Td.Kylin.DataCache": "1.5.0"
+    "Td.Kylin.WebApi": "1.1.13",
+    "Td.Kylin.DataCache": "2.3.0"
   },
 
   "tools": {
