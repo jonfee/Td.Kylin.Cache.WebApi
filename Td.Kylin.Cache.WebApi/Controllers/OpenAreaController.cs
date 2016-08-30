@@ -32,6 +32,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
             if (null != data)
             {
                 list = (from p in data
+                        where p.Status == true
                         select new OpenArea
                         {
                             AreaID = p.AreaID,
