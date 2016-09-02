@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/b2cproductcategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class B2CProductCategoryController : BaseController
+    public class B2CProductCategoryController : CacheResultController
     {
         /// <summary>
         /// 获取精品汇商品分类
@@ -49,7 +49,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                 list = query.ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.B2CProductCategory, list);
         }
     }
 }

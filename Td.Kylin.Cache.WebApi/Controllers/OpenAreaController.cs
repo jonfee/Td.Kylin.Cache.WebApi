@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/openarea")]
     [ApiAuthorization(Code = Role.Use)]
-    public class OpenAreaController : BaseController
+    public class OpenAreaController : CacheResultController
     {
         /// <summary>
         /// 获取所有开通区域
@@ -40,7 +40,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                         }).ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.OpenArea, list);
         }
     }
 }

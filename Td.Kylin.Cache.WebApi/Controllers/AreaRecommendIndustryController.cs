@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/arearecommendindustry")]
     [ApiAuthorization(Code = Role.Use)]
-    public class AreaRecommendIndustryController : BaseController
+    public class AreaRecommendIndustryController : CacheResultController
     {
         /// <summary>
         /// 获取区域开通推荐的行业
@@ -49,7 +49,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                 list = query.ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.AreaRecommendIndustry, list);
         }
     }
 }

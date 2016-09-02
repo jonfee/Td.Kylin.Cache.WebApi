@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Td.Kylin.Cache.WebApi.Core;
+using Td.Kylin.DataCache;
 
 namespace Td.Kylin.Cache.WebApi.Controllers
 {
@@ -13,6 +15,8 @@ namespace Td.Kylin.Cache.WebApi.Controllers
         [HttpGet]
         public IEnumerable<Guid> Get()
         {
+            var config = CacheConfigs.GetConfig(CacheType.AreaForum);
+
             return new Guid[] { Guid.NewGuid(),Guid.NewGuid(),Guid.NewGuid(),Guid.NewGuid(),Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
         }
 

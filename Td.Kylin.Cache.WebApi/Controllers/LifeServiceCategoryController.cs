@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/lifeservicecategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class LifeServiceCategoryController : BaseController
+    public class LifeServiceCategoryController : CacheResultController
     {
         /// <summary>
         /// 获取生活服务分类
@@ -40,7 +40,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                         }).ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.LifeServiceCategory, list);
         }
     }
 }

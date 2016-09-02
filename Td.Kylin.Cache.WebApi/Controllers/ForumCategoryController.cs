@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/forumcategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class ForumCategoryController : BaseController
+    public class ForumCategoryController : CacheResultController
     {
         /// <summary>
         /// 获取所有圈子分类
@@ -40,7 +40,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                         }).ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.ForumCategory, list);
         }
     }
 }

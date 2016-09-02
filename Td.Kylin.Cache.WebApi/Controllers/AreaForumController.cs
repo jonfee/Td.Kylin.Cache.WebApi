@@ -13,7 +13,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// 区域圈子接口
     /// </summary>
     [Route("api/areaforum")]
-    public class AreaForumController : BaseController
+    public class AreaForumController : CacheResultController
     {
         /// <summary>
         /// 获取区域圈子
@@ -50,7 +50,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                 list = query.ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.AreaForum, list);
         }
     }
 }

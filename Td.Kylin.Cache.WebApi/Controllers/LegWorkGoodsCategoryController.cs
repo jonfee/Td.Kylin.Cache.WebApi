@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/legworkgoodscategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class LegWorkGoodsCategoryController : BaseController
+    public class LegWorkGoodsCategoryController : CacheResultController
     {
         /// <summary>
         /// 获取所有跑腿物品类型
@@ -39,7 +39,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                         }).ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.LegworkGoodsCategory, list);
         }
     }
 }

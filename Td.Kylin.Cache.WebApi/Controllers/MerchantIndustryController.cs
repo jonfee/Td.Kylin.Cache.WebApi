@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/merchantindustry")]
     [ApiAuthorization(Code = Role.Use)]
-    public class MerchantIndustryController : BaseController
+    public class MerchantIndustryController : CacheResultController
     {
         /// <summary>
         /// 获取商家行业
@@ -41,7 +41,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                         }).ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.MerchantIndustry, list);
         }
     }
 }

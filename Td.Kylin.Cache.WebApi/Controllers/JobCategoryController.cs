@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/jobcategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class JobCategoryController : BaseController
+    public class JobCategoryController : CacheResultController
     {
         /// <summary>
         /// 获取所有职位类别
@@ -42,7 +42,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                         }).ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.JobCategory, list);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
     /// </summary>
     [Route("api/merchantcustomcategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class MerchantCustomCategoryController : BaseController
+    public class MerchantCustomCategoryController : CacheResultController
     {
         /// <summary>
         /// 获取商家自定义分类
@@ -49,7 +49,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                 list = query.ToList();
             }
 
-            return Success(list);
+            return Result(Core.CacheType.MerchantCustomCategory, list);
         }
     }
 }
