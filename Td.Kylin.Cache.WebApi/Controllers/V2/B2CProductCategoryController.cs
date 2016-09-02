@@ -9,47 +9,47 @@ using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
-    /// 区域推荐行业接口
+    /// 精品汇商品分类
     /// </summary>
-    [Route("api/arearecommendindustry")]
+    [Route("v2/b2cproductcategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class AreaRecommendIndustryController : CacheResultController
+    public class B2CProductCategoryController : CacheResultController
     {
         /// <summary>
-        /// 获取区域开通推荐的行业
+        /// 获取精品汇商品分类
         /// </summary>
         /// <param name="allArea">是否全部区域数据</param>
         /// <returns></returns>
         [HttpGet("values")]
         public IActionResult Values(bool allArea = true)
         {
-            var data = CacheCollection.AreaRecommendIndustryCache.Value();
+            var data = CacheCollection.B2CProductCategoryCache.Value();
 
-            List<AreaRecommendIndustry> list = new List<AreaRecommendIndustry>();
+            List<B2CProductCategory> list = new List<B2CProductCategory>();
 
             if (null != data)
             {
                 var query = from p in data
-                            select new AreaRecommendIndustry
+                            select new B2CProductCategory
                             {
                                 AreaID = p.AreaID,
-                                IndustryID = p.IndustryID,
-                                OrderNo = p.OrderNo,
-                                RecommendType = p.RecommendType
+                                CategoryID = p.CategoryID,
+                                Icon = p.Ico,
+                                Name = p.Name,
+                                OrderNo = p.OrderNo
                             };
 
                 if (!allArea)
                 {
                     query = query.Where(p => p.AreaID == Location.OperatorArea);
                 }
-
                 list = query.ToList();
             }
 
-            return Result(Core.CacheType.AreaRecommendIndustry, list);
+            return Result(Core.CacheType.B2CProductCategory, list);
         }
     }
 }

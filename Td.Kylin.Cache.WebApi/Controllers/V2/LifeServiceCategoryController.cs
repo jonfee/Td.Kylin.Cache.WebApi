@@ -9,40 +9,38 @@ using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
-    /// 职位类别接口
+    /// 生活服务分类接口
     /// </summary>
-    [Route("api/jobcategory")]
+    [Route("v2/lifeservicecategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class JobCategoryController : CacheResultController
+    public class LifeServiceCategoryController : CacheResultController
     {
         /// <summary>
-        /// 获取所有职位类别
+        /// 获取生活服务分类
         /// </summary>
         /// <returns></returns>
         [HttpGet("values")]
         public IActionResult Values()
         {
-            var data = CacheCollection.JobCategoryCache.Value();
+            var data = CacheCollection.LifeServiceSystemCategoryCache.Value();
 
-            List<JobCategory> list = new List<JobCategory>();
+            List<LifeServiceCategory> list = new List<LifeServiceCategory>();
 
             if (null != data)
             {
                 list = (from p in data
-                        select new JobCategory
+                        select new LifeServiceCategory
                         {
                             CategoryID = p.CategoryID,
-                            Name = p.Name,
-                            OrderNo = p.OrderNo,
-                            ParentID = p.ParentID,
-                            TagStatus = p.TagStatus
+                            ParentID = p.ParentCategoryID,
+                            Name = p.Name
                         }).ToList();
             }
 
-            return Result(Core.CacheType.JobCategory, list);
+            return Result(Core.CacheType.LifeServiceCategory, list);
         }
     }
 }

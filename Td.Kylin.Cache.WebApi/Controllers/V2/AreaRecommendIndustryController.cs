@@ -4,42 +4,41 @@ using System.Linq;
 using Td.Kylin.Cache.WebApi.Models;
 using Td.Kylin.DataCache;
 using Td.Kylin.WebApi;
+using Td.Kylin.WebApi.Filters;
+using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
-    /// 区域圈子接口
+    /// 区域推荐行业接口
     /// </summary>
-    [Route("api/areaforum")]
-    public class AreaForumController : CacheResultController
+    [Route("v2/arearecommendindustry")]
+    [ApiAuthorization(Code = Role.Use)]
+    public class AreaRecommendIndustryController : CacheResultController
     {
         /// <summary>
-        /// 获取区域圈子
+        /// 获取区域开通推荐的行业
         /// </summary>
         /// <param name="allArea">是否全部区域数据</param>
         /// <returns></returns>
         [HttpGet("values")]
         public IActionResult Values(bool allArea = true)
         {
-            var data = CacheCollection.AreaForumCache.Value();
+            var data = CacheCollection.AreaRecommendIndustryCache.Value();
 
-            List<AreaForum> list = new List<AreaForum>();
+            List<AreaRecommendIndustry> list = new List<AreaRecommendIndustry>();
 
             if (null != data)
             {
                 var query = from p in data
-                            select new AreaForum
+                            select new AreaRecommendIndustry
                             {
                                 AreaID = p.AreaID,
-                                AreaForumID = p.AreaForumID,
-                                ForumName = p.AliasName,
-                                CategoryID = p.CategoryID,
-                                Description = p.Description,
-                                ForumID = p.ForumID,
-                                Logo = p.Logo,
+                                IndustryID = p.IndustryID,
                                 OrderNo = p.OrderNo,
+                                RecommendType = p.RecommendType
                             };
 
                 if (!allArea)
@@ -50,7 +49,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                 list = query.ToList();
             }
 
-            return Result(Core.CacheType.AreaForum, list);
+            return Result(Core.CacheType.AreaRecommendIndustry, list);
         }
     }
 }

@@ -9,38 +9,39 @@ using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
-    /// 生活服务分类接口
+    /// 商家商品系统分类接口
     /// </summary>
-    [Route("api/lifeservicecategory")]
+    [Route("v2/merchantproductsyscategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class LifeServiceCategoryController : CacheResultController
+    public class MerchantProductSysCategoryController : CacheResultController
     {
         /// <summary>
-        /// 获取生活服务分类
+        /// 获取商家商品系统分类
         /// </summary>
         /// <returns></returns>
         [HttpGet("values")]
         public IActionResult Values()
         {
-            var data = CacheCollection.LifeServiceSystemCategoryCache.Value();
+            var data = CacheCollection.MerchantProductSystemCategoryCache.Value();
 
-            List<LifeServiceCategory> list = new List<LifeServiceCategory>();
+            List<MerchantProductSysCategory> list = new List<MerchantProductSysCategory>();
 
             if (null != data)
             {
                 list = (from p in data
-                        select new LifeServiceCategory
+                        select new MerchantProductSysCategory
                         {
                             CategoryID = p.CategoryID,
                             ParentID = p.ParentCategoryID,
+                            Icon = p.Icon,
                             Name = p.Name
                         }).ToList();
             }
 
-            return Result(Core.CacheType.LifeServiceCategory, list);
+            return Result(Core.CacheType.MerchantProductSysCategory, list);
         }
     }
 }

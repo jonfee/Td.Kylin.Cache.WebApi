@@ -9,39 +9,37 @@ using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
-    /// 商家行业接口
+    /// 跑腿物品类型接口
     /// </summary>
-    [Route("api/merchantindustry")]
+    [Route("v2/legworkgoodscategory")]
     [ApiAuthorization(Code = Role.Use)]
-    public class MerchantIndustryController : CacheResultController
+    public class LegWorkGoodsCategoryController : CacheResultController
     {
         /// <summary>
-        /// 获取商家行业
+        /// 获取所有跑腿物品类型
         /// </summary>
         /// <returns></returns>
         [HttpGet("values")]
         public IActionResult Values()
         {
-            var data = CacheCollection.MerchantIndustryCache.Value();
+            var data = CacheCollection.LegworkGoodsCategoryCache.Value();
 
-            List<MerchantIndustry> list = new List<MerchantIndustry>();
+            List<LegworkGoodsCategory> list = new List<LegworkGoodsCategory>();
 
             if (null != data)
             {
                 list = (from p in data
-                        select new MerchantIndustry
+                        select new LegworkGoodsCategory
                         {
-                            IndustryID = p.IndustryID,
-                            ParentID = p.ParentID,
-                            Icon = p.Icon,
+                            CategoryID = p.CategoryID,
                             Name = p.Name
                         }).ToList();
             }
 
-            return Result(Core.CacheType.MerchantIndustry, list);
+            return Result(Core.CacheType.LegworkGoodsCategory, list);
         }
     }
 }

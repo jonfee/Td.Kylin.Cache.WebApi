@@ -9,38 +9,38 @@ using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
-    /// 社区圈子分类接口
+    /// 开通区域接口
     /// </summary>
-    [Route("api/forumcategory")]
+    [Route("v2/openarea")]
     [ApiAuthorization(Code = Role.Use)]
-    public class ForumCategoryController : CacheResultController
+    public class OpenAreaController : CacheResultController
     {
         /// <summary>
-        /// 获取所有圈子分类
+        /// 获取所有开通区域
         /// </summary>
         /// <returns></returns>
         [HttpGet("values")]
         public IActionResult Values()
         {
-            var data = CacheCollection.ForumCategoryCache.Value();
+            var data = CacheCollection.OpenAreaCache.Value();
 
-            List<ForumCategory> list = new List<ForumCategory>();
+            List<OpenArea> list = new List<OpenArea>();
 
             if (null != data)
             {
                 list = (from p in data
-                        select new ForumCategory
+                        where p.Status == true
+                        select new OpenArea
                         {
-                            CategoryID = p.CategoryID,
-                            Name = p.Name,
-                            OrderNo = p.OrderNo
+                            AreaID = p.AreaID,
+                            AreaName = p.AreaName
                         }).ToList();
             }
 
-            return Result(Core.CacheType.ForumCategory, list);
+            return Result(Core.CacheType.OpenArea, list);
         }
     }
 }

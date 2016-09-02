@@ -9,12 +9,12 @@ using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Td.Kylin.Cache.WebApi.Controllers
+namespace Td.Kylin.Cache.WebApi.Controllers.V2
 {
     /// <summary>
     /// 商家自定义分类接口
     /// </summary>
-    [Route("api/merchantcustomcategory")]
+    [Route("v2/merchantcustomcategory")]
     [ApiAuthorization(Code = Role.Use)]
     public class MerchantCustomCategoryController : CacheResultController
     {
