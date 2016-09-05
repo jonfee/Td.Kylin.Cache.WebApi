@@ -4,6 +4,8 @@ using System.Linq;
 using Td.Kylin.Cache.WebApi.Models;
 using Td.Kylin.DataCache;
 using Td.Kylin.WebApi;
+using Td.Kylin.WebApi.Filters;
+using Td.Kylin.WebApi.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,6 +15,7 @@ namespace Td.Kylin.Cache.WebApi.Controllers.V2
     /// 区域圈子接口
     /// </summary>
     [Route("v2/areaforum")]
+    [ApiAuthorization(Code = Role.Use)]
     public class AreaForumController : CacheResultController
     {
         /// <summary>
