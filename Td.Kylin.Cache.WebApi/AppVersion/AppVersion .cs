@@ -63,11 +63,14 @@ namespace Td.Kylin.Cache.WebApi
 
                         string url = vs.Attribute("url").Value;
 
+                        string log = vs.Value;
+
                         versionList.Add(new AppVersion
                         {
                             Version = version,
                             IsForcedUpgrade = isForcedUpgrade,
-                            Url = url
+                            Url = url,
+                            Log = log
                         });
                     }
 
@@ -90,5 +93,7 @@ namespace Td.Kylin.Cache.WebApi
         public bool IsForcedUpgrade { get; set; }
 
         public string Url { get; set; }
+
+        public string Log { get; set; }
     }
 }
