@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--
+  * 用户端 IOS
+  -->
+  <app code="UIOS">
+    <version code="1.2.4" isForcedUpgrade="false" url="http://dl.quanxinshenghuo.net/ios/user/user_1.2.4.ipa"></version>
+  </app>
+  <!--
+  * 用户端 Android
+  -->
+  <app code="UAndroid">
+    <version code="1.2.4" isForcedUpgrade="false" url="http://dl.quanxinshenghuo.net/android/user/user_1.2.4.apk"></version>
+  </app>
+  <!--
+  * 工作端 IOS
+  -->
+  <app code="WIOS">
+    <version code="1.2.4" isForcedUpgrade="false" url="http://dl.quanxinshenghuo.net/ios/worker/worker_1.2.4.ipa"></version>
+  </app>
+  <!--
+  * 工作端 Android
+  -->
+  <app code="WAndroid">
+    <version code="1.2.4" isForcedUpgrade="false" url="http://dl.quanxinshenghuo.net/android/worker/worker_1.2.4.apk"></version>
+  </app>
+</root>
