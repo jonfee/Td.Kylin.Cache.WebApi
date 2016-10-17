@@ -58,17 +58,6 @@ namespace Td.Kylin.Cache.WebApi.Controllers
                 item = null;
             }
 
-            if (item == null)
-            {
-                item = new AppVersion
-                {
-                    Version = version,
-                    IsForcedUpgrade = false,
-                    Url = "",
-                    Log = ""
-                };
-            }
-
             return Success(item);
         }
     }
